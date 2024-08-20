@@ -27,12 +27,12 @@ def set_value(key):
     return jsonify({key:value}), 201
 
     
-    
-
-
-#@app.route('/store/<key>', methods=['DELETE'])
-#def delete_value(key):
-#    return render_template_string(html_template)
+@app.route('/store/<key>', methods=['DELETE'])
+def delete_value(key):
+    if key in store:
+        del store[key]
+        return jsonify({"Key has been deleted"}),200
+    return jsonify({"Key not found"})
 
 if __name__ == '__main__':
     app.run(port=8000)
