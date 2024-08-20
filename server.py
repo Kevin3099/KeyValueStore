@@ -18,7 +18,6 @@ def index():
 # Get method for key value pairs
 @app.route('/store/<key>', methods=['GET'])
 def get_value(key):
-    with lock:
         value = store.get(key)
         if value is None:
             return jsonify("No Key Value found"), 404
@@ -27,11 +26,13 @@ def get_value(key):
 # Set method for key value pair
 @app.route('/store/<key>', methods=['PUT'])
 def set_value(key):
-    with lock:
         value = request.json.get('value') #used insead of request.json['value'], handles errors better
         if value is None:
          return jsonify({"Error: No value provided"}), 400
-        store[key] = value
+        with lock:
+            if value in store.values():
+              return jsonify({"Error: Duplicate value found"}), 409
+            store[key] = value
         return jsonify({key:value}), 201
 
 # De;ete method for key value pairs    
