@@ -1,4 +1,4 @@
-from flask import Flask,render_template_string,jsonify, request
+from flask import Flask,send_from_directory,jsonify, request
 # importing lock function to handle multiple clients at once
 from threading import Lock
 
@@ -13,7 +13,7 @@ lock = Lock()
 # Default landing page
 @app.route('/')
 def index():
-    return render_template_string(html_template)
+    return send_from_directory('static', 'index.html')
 
 # Get method for key value pairs
 @app.route('/store/<key>', methods=['GET'])
@@ -30,6 +30,7 @@ def set_value(key):
         if value is None:
          return jsonify({"Error: No value provided"}), 400
         with lock:
+            # If time allows it add better more efficient way of doing this
             if value in store.values():
               return jsonify({"Error: Duplicate value found"}), 409
             store[key] = value

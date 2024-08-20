@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key-Value Store API Test</title>
+</head>
+<body>
+    <h1>Key-Value Store API Test</h1>
+
+    <!-- Form to set a value -->
+    <h3>Set Value (PUT)</h3>
+    <form id="setForm">
+        <label for="setKey">Key:</label>
+        <input type="text" id="setKey" name="key" required>
+        <label for="setValue">Value:</label>
+        <input type="text" id="setValue" name="value" required>
+        <button type="submit">Set Value</button>
+    </form>
+    <p id="setResult"></p>
+
+    <!-- Form to get a value -->
+    <h3>Get Value (GET)</h3>
+    <form id="getForm">
+        <label for="getKey">Key:</label>
+        <input type="text" id="getKey" name="key" required>
+        <button type="submit">Get Value</button>
+    </form>
+    <p id="getResult"></p>
+
+    <!-- Form to delete a value -->
+    <h3>Delete Value (DELETE)</h3>
+    <form id="deleteForm">
+        <label for="deleteKey">Key:</label>
+        <input type="text" id="deleteKey" name="key" required>
+        <button type="submit">Delete Value</button>
+    </form>
+    <p id="deleteResult"></p>
+
+    <!-- Include the JavaScript file -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
